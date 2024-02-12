@@ -31,6 +31,7 @@
 		29DD55ED2B4875EC003729AD /* ModItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DD55EC2B4875EC003729AD /* ModItem.swift */; };
 		29DD55EF2B4875ED003729AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29DD55EE2B4875ED003729AD /* Assets.xcassets */; };
 		29DD55F22B4875ED003729AD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29DD55F12B4875ED003729AD /* Preview Assets.xcassets */; };
+		E467D8082B79BE1A00B41ADE /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = E467D8072B79BE1A00B41ADE /* ZIPFoundation */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				298069B52B59F44F006CDB94 /* AlertToast in Frameworks */,
+				E467D8082B79BE1A00B41ADE /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +212,7 @@
 			name = BaldursModManager;
 			packageProductDependencies = (
 				298069B42B59F44F006CDB94 /* AlertToast */,
+				E467D8072B79BE1A00B41ADE /* ZIPFoundation */,
 			);
 			productName = BaldursModManager;
 			productReference = 29DD55E52B4875EC003729AD /* BaldursModManager.app */;
@@ -241,6 +244,7 @@
 			mainGroup = 29DD55DC2B4875EC003729AD;
 			packageReferences = (
 				298069B32B59F44F006CDB94 /* XCRemoteSwiftPackageReference "AlertToast" */,
+				E467D8062B79BE1A00B41ADE /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
 			productRefGroup = 29DD55E62B4875EC003729AD /* Products */;
 			projectDirPath = "";
@@ -503,6 +507,14 @@
 				kind = branch;
 			};
 		};
+		E467D8062B79BE1A00B41ADE /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.18;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -510,6 +522,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 298069B32B59F44F006CDB94 /* XCRemoteSwiftPackageReference "AlertToast" */;
 			productName = AlertToast;
+		};
+		E467D8072B79BE1A00B41ADE /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E467D8062B79BE1A00B41ADE /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

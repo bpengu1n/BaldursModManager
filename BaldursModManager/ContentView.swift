@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftData
 import AlertToast
+import UniformTypeIdentifiers
+import ZIPFoundation
 
 let UIDELAY: CGFloat = 0.01
 
@@ -272,14 +274,27 @@ struct ContentView: View {
   }
   
   private func selectFile() {
+    let fileManager = FileManager()
     let openPanel = NSOpenPanel()
-    openPanel.canChooseFiles = false
+    openPanel.canChooseFiles = true
     openPanel.canChooseDirectories = true
     openPanel.allowsMultipleSelection = false
-    openPanel.begin { response in
+    openPanel.allowedContentTypes = [UTType.zip]
+    openPanel.begin { (response) -> Void in
       if response == .OK, let selectedDirectory = openPanel.url {
-        Debug.log("Selected directory: \(selectedDirectory.path)")
-        parseImportedModFolder(at: selectedDirectory)
+          if selectedDirectory.hasDirectoryPath {
+              Debug.log("Selected directory: \(selectedDirectory.path)")
+              parseImportedModFolder(at: selectedDirectory)
+          } else {
+              let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true).appendingPathComponent(UUID().uuidString)
+              do {
+                  try fileManager.unzipItem(at: selectedDirectory.absoluteURL, to: temporaryDirectoryURL)
+                  parseImportedModFolder(at: temporaryDirectoryURL)
+              }
+              catch {
+                  Debug.log("Error unarchiving: \(error)")
+              }
+          }
       }
     }
   }
