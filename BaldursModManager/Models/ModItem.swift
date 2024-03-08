@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import XCTest
 
 @Model
 class ModItem {
@@ -39,6 +40,53 @@ class ModItem {
     self.modUuid = uuid
     self.modMd5 = md5
   }
+    
+    func asOrderXML() -> XMLElement {
+        let modElement = XMLElement(name: "node")
+        let attrElement = XMLElement(name: "attribute")
+        modElement.setAttributesWith(["id": "Module"])
+        attrElement.setAttributesWith(["id": "UUID", 
+                                       "type": "FixedString",
+                                       "value": modUuid])
+
+        modElement.addChild(attrElement)
+        
+        return modElement
+    }
+    
+    func asModuleShortDescXML() -> XMLElement {
+        let modElement = XMLElement(name: "node")
+        
+        modElement.setAttributesWith(["id": "ModuleShortDesc"])
+        
+        for attrName in ["Folder", "Name", "UUID", "Version64"] {
+            let attrElement = XMLElement(name: "attribute")
+            
+            switch attrName {
+            case "Folder":
+                attrElement.setAttributesWith(["id": attrName,
+                                               "type": "LSString",
+                                               "value": modFolder ?? ""])
+            case "Name":
+                attrElement.setAttributesWith(["id": attrName,
+                                               "type": "LSString",
+                                               "value": modName])
+            case "UUID":
+                attrElement.setAttributesWith(["id": attrName,
+                                               "type": "FixedString",
+                                               "value": modUuid])
+            case "Version64":
+                attrElement.setAttributesWith(["id": attrName,
+                                               "type": "int64",
+                                               "value": modVersion ?? ""])
+            default:
+                break
+            }
+            modElement.addChild(attrElement)
+        }
+        
+        return modElement
+    }
 }
 
 

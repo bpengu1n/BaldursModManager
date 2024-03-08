@@ -46,7 +46,7 @@ class FileUtility {
   private static func createDefaultSettingsFileIfNeeded(in directoryURL: URL, withFileManager fileManager: FileManager) {
     let settingsFileURL = directoryURL.appendingPathComponent("modsettings.lsx")
     if !fileManager.fileExists(atPath: settingsFileURL.path) {
-      let contents = getDefaultModSettingsLsxContents()
+        let contents = getDefaultModSettingsLsxContents().xmlString()
       do {
         try contents.write(to: settingsFileURL, atomically: true, encoding: .utf8)
       } catch {
